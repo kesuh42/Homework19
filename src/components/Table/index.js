@@ -3,8 +3,8 @@ import API from "../../utils/API"
 
 class Table extends React.Component {
     state = {
-        filter: true,
-        sort: true,
+        filter: false,
+        sort: false,
         userdata: []
     }
 
@@ -51,24 +51,38 @@ class Table extends React.Component {
         }
         return result
     }
+
+    handleFilter = () => {
+        this.setState({...this.state, filter: true})
+    }
+
+    handleSort = () => {
+        this.setState({...this.state, sort: true})
+    }
+
+    handleOriginal = () => {
+        this.setState({...this.state, filter: false, sort: false})
+        console.log(this.state)
+    }
     
     render() {
         return (
-            <table>
-                <tr>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>Gender</th>
-                    <th>Email</th>
-                    <th>Phone Number</th>
-                </tr>
-                {this.iterator(this.state.userdata)}
-            </table>
+            <div>
+                <table>
+                    <tr>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Gender</th>
+                        <th>Email</th>
+                        <th>Phone Number</th>
+                    </tr>
+                    {this.iterator(this.state.userdata)}
+                </table>
 
-
-
-            // <div> {this.iterator(this.state.userdata)}
-            // </div>
+                <button onClick={this.handleFilter}>FILTER</button>
+                <button onClick={this.handleSort}>SORT</button>
+                <button onClick={this.handleOriginal}>ORIGINAL</button>
+            </div>
         )
     }
 }
